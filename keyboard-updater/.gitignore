@@ -1,0 +1,5 @@
+Makefile
+.vscode/
+updater
+firmware/*.c
+*.bin

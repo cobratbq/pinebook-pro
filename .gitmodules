@@ -1,0 +1,12 @@
+[submodule "sources/brcmfmac_sdio-firmware"]
+	path = sources/brcmfmac_sdio-firmware
+	url = https://github.com/LibreELEC/brcmfmac_sdio-firmware.git
+[submodule "sources/pinebook-firmware"]
+	path = sources/pinebook-firmware
+	url = https://gitlab.manjaro.org/tsys/pinebook-firmware.git
+[submodule "sources/pinebook-pro-keyboard-updater"]
+	path = sources/pinebook-pro-keyboard-updater
+	url = https://github.com/dragan-simic/pinebook-pro-keyboard-updater.git
+[submodule "sources/Tow-Boot"]
+	path = sources/Tow-Boot
+	url = https://github.com/Tow-Boot/Tow-Boot.git

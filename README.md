@@ -25,3 +25,10 @@ Current revision has greatly reduced latency in touchpad control and good suppor
 
 Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is available regardless of the contents of the eMMC module, NVMe drive or SD-card.
 
+## `images`
+
+- Debian Bullseye 11u1 arm64 generic: `debian-bullseye-11u1-arm64-generic.img.xz`
+  1. [firmware.none.img.gz](<https://deb.debian.org/debian/dists/bullseye/main/installer-arm64/20210731+deb11u1/images/netboot/SD-card-images/firmware.none.img.gz> "no firmware, as we assume that the firmware is flashed into the SPI flash")
+  1. [partition.img.gz](<https://deb.debian.org/debian/dists/bullseye/main/installer-arm64/20210731+deb11u1/images/netboot/SD-card-images/partition.img.gz> "Debian SD-card installation image")
+  1. `zcat firmware.none.img.gz partition.img.gz | xz -z >  debian-bullseye-11u1-arm64-generic.img.xz`
+

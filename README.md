@@ -32,3 +32,15 @@ Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is availa
   1. [partition.img.gz](<https://deb.debian.org/debian/dists/bullseye/main/installer-arm64/20210731+deb11u1/images/netboot/SD-card-images/partition.img.gz> "Debian SD-card installation image")
   1. `zcat firmware.none.img.gz partition.img.gz | xz -z >  debian-bullseye-11u1-arm64-generic.img.xz`
 
+### Debian Bullseye
+
+- Make sure u-boot firmware is installed to SPI-flash.
+  - Note: u-boot expects the _first partition according to the MBR/GPT partition table_ to contain boot information.
+  - u-boot generally supports `FAT32` and `ext2/3/4` file systems.
+- Boot SD-card image. (generic AARCH64 Debian installer image for SD-cards, without firmware prefix)
+- Perform Debian Bullseye installation. Before rebooting into the newly installed system:
+  1. chroot into target filesystem.
+  1. Remove `flash-kernel` package. (Package responsible for producing `boot.scr` bootscript file compositions.)
+  1. Install `u-boot-menu` (_extlinux_) and run `u-boot-update` to create/update `extlinux/extlinux.conf` file with all kernels to choose from. As the u-boot firmware supports _extlinux_.
+  1. Check for available firmware for broadcom (`brcmfmac43456-sdio`) and rockchip (`rk3399`). Also note `lib-firmware/brcm` in repo.
+  1. Install `modprobe.d/panfrost.conf` and `modprobe.d/brcmfmac.conf` files into `/etc/modprobe.d` and run `update-initramfs -u -k all`.

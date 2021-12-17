@@ -8,6 +8,8 @@ Initialize git-submodules for source repositories.
   Binary blobs for control of _brcmfmac_ combined WiFi/bluetooth module.
 - `BCM4345C5.hcd`: firmware for combined WiFi/bluetooth module.
 
+__NOTE__ after suspend or significant changes to the networking processes, module `brcmfmac` might need to be reloaded. (`sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`)
+
 ## `keyboard-updater`
 
 Twice-revised keyboard/touchpad-firmware. [Original by ayufan-rock64](https://github.com/ayufan-rock64/pinebook-pro-keyboard-updater), then [adapted by JackHumbert](https://github.com/jackhumbert/pinebook-pro-keyboard-updater), later [adapted by dragan-simic](https://github.com/dragan-simic/pinebook-pro-keyboard-updater).

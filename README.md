@@ -8,7 +8,10 @@ Initialize git-submodules for source repositories.
   Binary blobs for control of _brcmfmac_ combined WiFi/bluetooth module.
 - `BCM4345C5.hcd`: firmware for combined WiFi/bluetooth module.
 
-__NOTE__ after suspend or significant changes to the networking processes, module `brcmfmac` might need to be reloaded. (`sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`)
+### Known issues
+
+- After suspend, module `brcmfmac` might need to be reloaded, as it will exhibit significant packet loss.  
+  `sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`
 
 ## `keyboard-updater`
 
@@ -23,7 +26,7 @@ Current revision has greatly reduced latency in touchpad control and good suppor
 
 ## Tow-Boot
 
-- SPI flash image to write `tow-boot` opinionated u-boot image to the Pinebook Pro SPI flash.
+- SPI flash-image to write `tow-boot` opinionated u-boot image to the Pinebook Pro SPI flash.
 
 Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is available regardless of the contents of the eMMC module, NVMe drive or SD-card.
 

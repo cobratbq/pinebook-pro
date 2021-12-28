@@ -49,3 +49,14 @@ Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is availa
   1. Install `u-boot-menu` (_extlinux_) and run `u-boot-update` to create/update `extlinux/extlinux.conf` file with all kernels to choose from. As the u-boot firmware supports _extlinux_.
   1. Check for available firmware for broadcom (`brcmfmac43456-sdio`) and rockchip (`rk3399`). Also note `lib-firmware/brcm` in repo.
   1. Install `modprobe.d/panfrost.conf` and `modprobe.d/brcmfmac.conf` files into `/etc/modprobe.d` and run `update-initramfs -u -k all`.
+
+## Notes
+
+- Loss of functional transport of network while wifi shows as connected: try reloading `brcmfmac` module. (Reason for this happening is not clear.)
+- No sound:
+  - `alsamixer` provides many controls for precise configuration of the audio device.
+  - check `dmesg` for sound card, and `/sys/devices/platform/es8316-sound/sound/card0/input*` with `*` an arbitrary number, to check if at least one input is available.  
+    ```
+    input: rockchip,es8316-codec Headphones as /devices/platform/es8316-sound/sound/card0/input8
+    ```
+  - run `alsamixer` and select actual device. Then check if following channels are open: `Left Headphone Mixer LLIN`, `Left Headphone Mixer Left DAC`, `Right Headphone Mixer RLIN`, `Right Headphone Mixer Right DAC`, and check neighboring options just in case.

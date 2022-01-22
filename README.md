@@ -6,6 +6,7 @@ Initialize git-submodules for source repositories.
 
 - `brcmfmac43456-sdio.bin`, `brcmfmac43456-sdio.clm_blob`, `brcmfmac43456-sdio.pine64,pinebook-pro.txt`, `brcmfmac43456-sdio.txt`  
   Binary blobs for control of _brcmfmac_ combined WiFi/bluetooth module.
+  - NOTE: at this point it is not clear to me whether `brcmfmac43456-sdio.clm_blob` is required. It is not available in the source repository that I later added, which otherwise contains the (binary-exact) same files. The `*.clm_blob` file was originally part of the driver package.
 - `BCM4345C5.hcd`: firmware for combined WiFi/bluetooth module.
 
 ### Known issues
@@ -27,6 +28,9 @@ Current revision has greatly reduced latency in touchpad control and good suppor
 ## Tow-Boot
 
 - SPI flash-image to write `tow-boot` opinionated u-boot image to the Pinebook Pro SPI flash.
+- Confirmed working images:
+  - `pine64-pinebookPro-2021.04-002.tar.xz`: flashed into empty/erased SPI-flash module.
+  - `pine64-pinebookPro-2021.10-003.tar.xz`: flashed over SPI-flash memory containing version `2021.04-002`. (Not that that should prove to be a significant difference.)
 
 Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is available regardless of the contents of the eMMC module, NVMe drive or SD-card.
 

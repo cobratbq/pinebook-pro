@@ -1,0 +1,80 @@
+-- Boot f79082bbf8bb4a95864a50f0d8a1580e --
+Mar 23 02:41:27 dwarfstar systemd-logind[1647]: Power key pressed.
+Mar 23 02:40:07 dwarfstar systemd[1]: NetworkManager-dispatcher.service: Succeeded.
+Mar 23 02:40:01 dwarfstar systemd[1]: systemd-rfkill.service: Succeeded.
+Mar 23 02:39:57 dwarfstar wpa_supplicant[1655]: nl80211: deinit ifname=wlan0 disabled_11b_rates=0
+Mar 23 02:39:57 dwarfstar wpa_supplicant[1655]: Could not read interface p2p-dev-wlan0 flags: No such device
+Mar 23 02:39:57 dwarfstar wpa_supplicant[1655]: nl80211: deinit ifname=p2p-dev-wlan0 disabled_11b_rates=0
+Mar 23 02:39:57 dwarfstar kernel: ---[ end trace 55e228b72d1bde8d ]---
+Mar 23 02:39:57 dwarfstar kernel:  __secondary_switched+0x94/0x98
+Mar 23 02:39:57 dwarfstar kernel:  secondary_start_kernel+0x14c/0x170
+Mar 23 02:39:57 dwarfstar kernel:  cpu_startup_entry+0x34/0x80
+Mar 23 02:39:57 dwarfstar kernel:  do_idle+0x238/0x2b0
+Mar 23 02:39:57 dwarfstar kernel:  default_idle_call+0x48/0x140
+Mar 23 02:39:57 dwarfstar kernel:  rcu_idle_enter+0x1c/0x30
+Mar 23 02:39:57 dwarfstar kernel:  rcu_eqs_enter.constprop.0+0x68/0x70
+Mar 23 02:39:57 dwarfstar kernel: Call trace:
+Mar 23 02:39:57 dwarfstar kernel: x2 : 4000000000000002 x1 : 4000000000000000 x0 : ffff0000f7750a40
+Mar 23 02:39:57 dwarfstar kernel: x5 : 00ffffffffffffff x4 : ffff8000ee239000 x3 : 0000000000000000
+Mar 23 02:39:57 dwarfstar kernel: x8 : ffff00000076dbf0 x7 : 0000000000000000 x6 : 00000006f80c1501
+Mar 23 02:39:57 dwarfstar kernel: x11: ffff80000993eb58 x10: 0000000000000b90 x9 : ffff800008c11d68
+Mar 23 02:39:57 dwarfstar kernel: x14: 000000000000003f x13: 0000000000000000 x12: ffff800008e8b338
+Mar 23 02:39:57 dwarfstar kernel: x17: 0000000000000001 x16: 0000000000000019 x15: 0000000000000033
+Mar 23 02:39:57 dwarfstar kernel: x20: ffff80000993eb34 x19: ffff800009504000 x18: 000000000000000e
+Mar 23 02:39:57 dwarfstar kernel: x23: ffff80000993eb6c x22: ffff8000095153b0 x21: ffff80000993ea28
+Mar 23 02:39:57 dwarfstar kernel: x26: ffff00000076d000 x25: 0000000000000000 x24: 0000000000000000
+Mar 23 02:39:57 dwarfstar kernel: x29: ffff800009e03dd0 x28: 0000000000000000 x27: 0000000000000000
+Mar 23 02:39:57 dwarfstar kernel: sp : ffff800009e03dd0
+Mar 23 02:39:57 dwarfstar kernel: lr : rcu_idle_enter+0x1c/0x30
+Mar 23 02:39:57 dwarfstar kernel: pc : rcu_eqs_enter.constprop.0+0x68/0x70
+Mar 23 02:39:57 dwarfstar kernel: pstate: 200003c5 (nzCv DAIF -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+Mar 23 02:39:57 dwarfstar kernel: Hardware name: Pine64 Pinebook Pro (DT)
+Mar 23 02:39:57 dwarfstar kernel: CPU: 2 PID: 0 Comm: swapper/2 Tainted: G      D  C        5.16.0-0.bpo.4-arm64 #1  Debian 5.16.12-1~bpo11+1
+Mar 23 02:39:57 dwarfstar kernel:  nvmem_rockchip_efuse industrialio_triggered_buffer videodev snd_soc_core snd_pcm_dmaengine kfifo_buf snd_pcm io_domain mc industrialio mt>
+Mar 23 02:39:57 dwarfstar kernel: Modules linked in: snd_seq_dummy snd_hrtimer snd_seq snd_seq_device nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_reje>
+Mar 23 02:39:57 dwarfstar kernel: WARNING: CPU: 2 PID: 0 at kernel/rcu/tree.c:613 rcu_eqs_enter.constprop.0+0x68/0x70
+Mar 23 02:39:57 dwarfstar kernel: ------------[ cut here ]------------
+Mar 23 02:39:57 dwarfstar kernel: ---[ end trace 55e228b72d1bde8c ]---
+Mar 23 02:39:57 dwarfstar kernel: Code: b9402b82 8b0202c0 eb1a02df 54000041 (d4210000) 
+Mar 23 02:39:57 dwarfstar kernel:  ret_from_fork+0x10/0x20
+Mar 23 02:39:57 dwarfstar kernel:  kthread+0x154/0x160
+Mar 23 02:39:57 dwarfstar kernel:  worker_thread+0x188/0x504
+Mar 23 02:39:57 dwarfstar kernel:  process_one_work+0x1f4/0x490
+Mar 23 02:39:57 dwarfstar kernel:  brcmf_core_bus_reset+0x34/0x44 [brcmfmac]
+Mar 23 02:39:57 dwarfstar kernel:  brcmf_sdio_bus_reset+0x68/0xc0 [brcmfmac]
+Mar 23 02:39:57 dwarfstar kernel:  brcmf_sdiod_probe+0x170/0x21c [brcmfmac]
+Mar 23 02:39:57 dwarfstar kernel:  brcmf_sdiod_remove+0x48/0xc0 [brcmfmac]
+Mar 23 02:39:57 dwarfstar kernel:  kfree+0x210/0x220
+Mar 23 02:39:57 dwarfstar kernel:  __slab_free+0x58/0x40c
+Mar 23 02:39:57 dwarfstar kernel: Call trace:
+Mar 23 02:39:57 dwarfstar kernel: x2 : 0000000000000040 x1 : fffffc00002d2b80 x0 : ffff00000b4aee40
+Mar 23 02:39:57 dwarfstar kernel: x5 : ffff8000013fa728 x4 : 0000000000000001 x3 : ffff00000b4aee00
+Mar 23 02:39:57 dwarfstar kernel: x8 : ffff800009967ce0 x7 : ffff8000099bfce0 x6 : 00000006f8005d01
+Mar 23 02:39:57 dwarfstar kernel: x11: ffff8000099bfce0 x10: 00000000fffff000 x9 : ffff8000083401d0
+Mar 23 02:39:57 dwarfstar kernel: x14: 0000000000000000 x13: 657a69736b636f6c x12: 6220314620746573
+Mar 23 02:39:57 dwarfstar kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000030
+Mar 23 02:39:57 dwarfstar kernel: x20: fffffc00002d2ba0 x19: fffffc00002d2b80 x18: 0000000000000000
+Mar 23 02:39:57 dwarfstar kernel: x23: ffff00000b4aee00 x22: ffff00000b4aee00 x21: 0000000000000001
+Mar 23 02:39:57 dwarfstar kernel: x26: ffff00000b4aee00 x25: ffff0000f7753705 x24: 000000000001288a
+Mar 23 02:39:57 dwarfstar kernel: x29: ffff80000a22bbf0 x28: ffff000000401200 x27: 000000008020001a
+Mar 23 02:39:57 dwarfstar kernel: sp : ffff80000a22bbf0
+Mar 23 02:39:57 dwarfstar kernel: lr : kfree+0x210/0x220
+Mar 23 02:39:57 dwarfstar kernel: pc : __slab_free+0x58/0x40c
+Mar 23 02:39:57 dwarfstar kernel: pstate: 60000005 (nZCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+Mar 23 02:39:57 dwarfstar kernel: Workqueue: events brcmf_core_bus_reset [brcmfmac]
+Mar 23 02:39:57 dwarfstar kernel: Hardware name: Pine64 Pinebook Pro (DT)
+Mar 23 02:39:57 dwarfstar kernel: CPU: 2 PID: 639 Comm: kworker/2:2 Tainted: G         C        5.16.0-0.bpo.4-arm64 #1  Debian 5.16.12-1~bpo11+1
+Mar 23 02:39:57 dwarfstar kernel:  nvmem_rockchip_efuse industrialio_triggered_buffer videodev snd_soc_core snd_pcm_dmaengine kfifo_buf snd_pcm io_domain mc industrialio mt>
+Mar 23 02:39:57 dwarfstar kernel: Modules linked in: snd_seq_dummy snd_hrtimer snd_seq snd_seq_device nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_reje>
+Mar 23 02:39:57 dwarfstar kernel: Internal error: Oops - BUG: 0 [#1] SMP
+Mar 23 02:39:57 dwarfstar kernel: kernel BUG at mm/slub.c:379!
+Mar 23 02:39:57 dwarfstar kernel: ------------[ cut here ]------------
+Mar 23 02:39:57 dwarfstar kernel: brcmfmac: brcmf_sdiod_probe: Failed to set F1 blocksize
+Mar 23 02:39:57 dwarfstar systemd[1]: Started Network Manager Script Dispatcher Service.
+Mar 23 02:39:57 dwarfstar dbus-daemon[1642]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Mar 23 02:39:57 dwarfstar systemd[1]: Starting Network Manager Script Dispatcher Service...
+Mar 23 02:39:57 dwarfstar NetworkManager[1704]: <info>  [1647999597.0084] radio killswitch /sys/devices/platform/fe310000.mmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/ieee80211/>
+Mar 23 02:39:57 dwarfstar NetworkManager[1704]: <info>  [1647999597.0034] device (p2p-dev-wlan0): state change: disconnected -> unmanaged (reason 'removed', sys-iface-state>
+Mar 23 02:39:57 dwarfstar dbus-daemon[1642]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'>
+Mar 23 02:39:56 dwarfstar NetworkManager[1704]: <info>  [1647999596.9908] manager: NetworkManager state is now DISCONNECTED
+Mar 23 02:39:56 dwarfstar systemd[1]: Started Load/Save RF Kill Switch Status.

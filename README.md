@@ -13,6 +13,7 @@ Initialize git-submodules for source repositories.
 
 - After suspend, module `brcmfmac` might need to be reloaded, as it will exhibit significant packet loss.  
   `sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`
+- There exists a bug in the firmware, i.e. the binary blob, so currently trying with `roamoff=1` module parameter and `.clm_blob` file present.
 
 ## `keyboard-updater`
 

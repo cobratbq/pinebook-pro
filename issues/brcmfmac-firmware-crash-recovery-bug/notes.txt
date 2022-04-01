@@ -1,0 +1,31 @@
+Earlier double-free fix for brcmfmac: <https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/net/wireless/broadcom/brcm80210/brcmfmac/sdio.c?h=linux-5.16.y&id=7ea7a1e05c7ff5ffc9f9ec1f0849f6ceb7fcd57c>
+
+https://askubuntu.com/questions/168279/how-do-i-build-a-single-in-tree-kernel-module
+
+# Debian source
+
+```console
+aptitude install linux-headers-3.2.0-4-686-pae
+aptitude install linux-source-3.2
+cd /usr/src/
+tar xjf linux-source-3.2.tar.bz2
+cd /usr/src/linux-source-3.2
+cp ../linux-headers-3.2.0-4-686-pae/Module.symvers .
+make oldconfig
+vi .config # enable ft1000 module: CONFIG_FT1000=m
+make prepare && make modules_prepare
+make M=scripts/mod
+make M=drivers/net/wireless/broadcom/brcm80211/brcmfmac modules
+cp drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko /lib/modules/5.16.0-0.bpo.4-arm64/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko
+depmod 5.16.0-0.bpo.4-arm64
+modprobe brcmfmac
+```
+
+# Vanilla kernel
+
+```console
+make nconfig
+make -j4 && make -j4 modules && make -j4 dtbs
+sudo INSTALL_DTBS_PATH=/usr/lib/linux-image-5.16.18 make dtbs_install modules_install install
+```
+

@@ -57,6 +57,10 @@ Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is availa
 
 ## Notes
 
+- Currently experimenting with: `brcmfmac43456` firmware from Raspberry Pi 400
+	- https://forums.raspberrypi.com/viewtopic.php?f=117&t=291688
+    - [firmware](<https://drive.google.com/file/d/1tLev-L-Jsg1_YaAckOGIzw9JYTRI17Mu/view> "brcmfmac43456-sdio.bin")
+    - [clm_blob](<https://drive.google.com/file/d/1J8DdbsrZcSkDYKUPsdy2RvncttSwQdBH/view> "brcmfmac43456-sdio.clm_blob")
 - Loss of functional transport of network while wifi shows as connected: try reloading `brcmfmac` module. (Reason for this happening is not clear.)
 - No sound:
   - `alsamixer` provides many controls for precise configuration of the audio device.

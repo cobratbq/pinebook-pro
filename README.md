@@ -2,18 +2,35 @@
 
 Initialize git-submodules for source repositories.
 
-## `lib-firmware`
+## Broadcom BRCM4345/9 wireless/bluetooth module (`brcmfmac43456`)
 
-- `brcmfmac43456-sdio.bin`, `brcmfmac43456-sdio.clm_blob`, `brcmfmac43456-sdio.pine64,pinebook-pro.txt`, `brcmfmac43456-sdio.txt`  
+- `brcmfmac43456-sdio.bin`, `brcmfmac43456-sdio.pine64,pinebook-pro.txt`, `brcmfmac43456-sdio.txt`  
   Binary blobs for control of _brcmfmac_ combined WiFi/bluetooth module.
-  - NOTE: at this point it is not clear to me whether `brcmfmac43456-sdio.clm_blob` is required. It is not available in the source repository that I later added, which otherwise contains the (binary-exact) same files. The `*.clm_blob` file was originally part of the driver package.
-- `BCM4345C5.hcd`: firmware for combined WiFi/bluetooth module.
+- `brcmfmac43456-sdio.clm_blob`  
+  Some instructional blob used to enable wide bands for high-speed connections.
+- `BCM4345C5.hcd`: (bluetooth) firmware for combined WiFi/bluetooth module.
+
+### Firmware dated 2020-11-16 (`lib-firmware-brcm-20201116`)
+
+This firmware seems to be for the Pinebook Pro adapter. It was found in [some Raspberry Pi 400 forum post](<https://forums.raspberrypi.com/viewtopic.php?f=117&t=291688>).
+
+- [firmware](<https://drive.google.com/file/d/1tLev-L-Jsg1_YaAckOGIzw9JYTRI17Mu/view> "brcmfmac43456-sdio.bin")
+- [clm_blob](<https://drive.google.com/file/d/1J8DdbsrZcSkDYKUPsdy2RvncttSwQdBH/view> "brcmfmac43456-sdio.clm_blob")
+
+I have no more information about its authenticity, but version and device information match, the firmware loads, and the device functions.
+
+### Firmware dated 2017-06-16 (`lib-firmware-brcm-20170616`)
+
+The original firmware.
+
+This version of the firmware is known to crash. Additionally, current available drivers cannot successfully recover from firmware crashes. The newest drivers (kernel >= 5.12.y) will attempt to perform a hardware reset. However, for some early failure cases on kernel with hardened memory management this results in double-free error.
 
 ### Known issues
 
 - After suspend, module `brcmfmac` might need to be reloaded, as it will exhibit significant packet loss.  
   `sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`
-- There exists a bug in the firmware, i.e. the binary blob, so currently trying with `roamoff=1` module parameter and `.clm_blob` file present.
+- There exists a bug in the firmware, i.e. the binary blob, so currently trying with `roamoff=1` module parameter and `.clm_blob` file present.  
+  See directory `issues` for more notes and details on a kernel module crash due to double freeing memory after hardware reset as result of firmware crash.
 
 ## `keyboard-updater`
 
@@ -57,11 +74,6 @@ Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is availa
 
 ## Notes
 
-- Currently experimenting with: `brcmfmac43456` firmware from Raspberry Pi 400
-	- https://forums.raspberrypi.com/viewtopic.php?f=117&t=291688
-    - [firmware](<https://drive.google.com/file/d/1tLev-L-Jsg1_YaAckOGIzw9JYTRI17Mu/view> "brcmfmac43456-sdio.bin")
-    - [clm_blob](<https://drive.google.com/file/d/1J8DdbsrZcSkDYKUPsdy2RvncttSwQdBH/view> "brcmfmac43456-sdio.clm_blob")
-- Loss of functional transport of network while wifi shows as connected: try reloading `brcmfmac` module. (Reason for this happening is not clear.)
 - No sound:
   - `alsamixer` provides many controls for precise configuration of the audio device.
   - check `dmesg` for sound card, and `/sys/devices/platform/es8316-sound/sound/card0/input*` with `*` an arbitrary number, to check if at least one input is available.  

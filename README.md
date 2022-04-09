@@ -72,12 +72,29 @@ Version-information: (`strings`)
 GBCM4345C5 Ampak_CL1 UART 37.4 MHz BT 5.0 [Version: Version: 0039.0089]
 ```
 
+### Firmware dated 2019-09-27 (`lib-firmware-brcm-20190927`)
+
+This firmware was found in the _imx-firmware_ (_coral_) repository. See git-submodules for exact revision.
+
+I have not used this firmware.
+
+Version-information: (`strings`)
+
+`brcmfmac43456-sdio.bin`
+```
+43455c5-roml/43455_sdio-pno-aoe-pktfilter-bcm_ftrs-ak-bcol-clm_4335_ss-sr-mchan-pktctx-lpc-pwropt-txbf-wl11u-wapi-txpwr-wepso-gscan-linkstat-pwrstats-proxd-ndoe-mfp-tdls-dhcpd-idauth-idsup-neeze-akiss-dfsctl-apcs-tka-wpf-gtr-noplmt-ak_disassoc-b5gctl-sdiorxenhance
+	Version: 7.45.96.53 (5a84613@shgit) (r745790)
+	CRC: 3ae8a8e5
+	Date: Fri 2019-09-27 15:21:52 CST
+	Ucode Ver: 1043.20721
+	FWID: 01-54faa385
+```
 
 ### Firmware dated 2017-06-16 (`lib-firmware-brcm-20170616`)
 
 The original firmware.
 
-This version of the firmware is known to crash. Additionally, current available drivers cannot successfully recover from firmware crashes. The newest drivers (kernel >= 5.12.y) will attempt to perform a hardware reset. However, for some early failure cases on kernel with hardened memory management this results in double-free error.
+This version of the firmware is known to crash. Additionally, current available drivers cannot successfully recover from firmware crashes. The newest drivers (`kernel >= 5.12.y`) will attempt to perform a hardware reset. However, for some early failure cases on kernel with hardened memory management this results in double-free error.
 
 Version-information: (`strings`)
 

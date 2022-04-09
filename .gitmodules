@@ -13,3 +13,6 @@
 [submodule "sources/armbian-linux-firmware.git"]
 	path = sources/armbian-linux-firmware.git
 	url = https://github.com/armbian/firmware.git
+[submodule "sources/imx-firmware"]
+	path = sources/imx-firmware
+	url = https://coral.googlesource.com/imx-firmware

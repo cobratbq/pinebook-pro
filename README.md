@@ -19,11 +19,50 @@ This firmware seems to be for the Pinebook Pro adapter. It was found in [some Ra
 
 I have no more information about its authenticity, but version and device information match, the firmware loads, and the device functions.
 
+Version-information: (`strings`)
+
+```
+43455c5-roml/43455_sdio-pno-aoe-pktfilter-sr-pktctx-lpc-pwropt-txbf-wl11u-txpwr-wepso-linkstat-pwrstats-ndoe-tdls-mfp-ve-extsae-43455_ftrs-noclminc-ob
+	Version: 7.45.96 (r745790)
+	CRC: 301bcfe7
+	Date: Mon 2020-11-16 16:27:54 CST
+	Ucode Ver: 1043.20724
+	FWID: 01-99758c86
+```
+
+### Firmware dated 2020-05-14 (`lib-firmware-brcm-20200514`)
+
+This firmware seems to be for the Pinebook Pro adapter. It was found as [a proposed patch](<https://lore.kernel.org/linux-firmware/20210117074817.1721-2-alistair@alistair23.me/> "[PULL 1/1] brcm: Add the brcmfmac43456-sdio.* files") to kernel [linux-firmware.git](<https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/> "Repository of firmware blobs for use with the Linux kernel") repository.
+
+I have not used this firmware at all.
+
+Version-information: (`strings`)
+
+```
+43455c5-roml/43455_sdio-pno-aoe-pktfilter-pktctx-lpc-pwropt-43455_ftrs-mfp-noclminc-clm_min
+	Version: 7.84.17.1 (r871554)
+	CRC: 72494685
+	Date: Thu 2020-05-14 17:41:11 KST
+	Ucode Ver: 1043.20424
+	FWID: 01-3d9e1d87
+```
+
 ### Firmware dated 2017-06-16 (`lib-firmware-brcm-20170616`)
 
 The original firmware.
 
 This version of the firmware is known to crash. Additionally, current available drivers cannot successfully recover from firmware crashes. The newest drivers (kernel >= 5.12.y) will attempt to perform a hardware reset. However, for some early failure cases on kernel with hardened memory management this results in double-free error.
+
+Version-information: (`strings`)
+
+```
+43455c5-roml/43455_sdio-43455_ftrs-bcm_ftrs-ag-pno-aoe-pktfilter-srfast-pktctx-lpc-pwropt-wapi-mfp-clm_4335_ss-txpwr-wepso-noccxaka-sarctrl-gscan-linkstat-pwrstats-ak-idauth-idsup-ndoe-mchan-wfds
+	Version: 7.45.96.0
+	CRC: 1d0e37c2
+	Date: Fri 2017-06-16 12:39:23 CST
+	Ucode Ver: 1043.2070
+	FWID: 01-1813af84
+```
 
 ### Known issues
 

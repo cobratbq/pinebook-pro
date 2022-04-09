@@ -21,6 +21,7 @@ I have no more information about its authenticity, but version and device inform
 
 Version-information: (`strings`)
 
+`brcmfmac43456-sdio.bin`
 ```
 43455c5-roml/43455_sdio-pno-aoe-pktfilter-sr-pktctx-lpc-pwropt-txbf-wl11u-txpwr-wepso-linkstat-pwrstats-ndoe-tdls-mfp-ve-extsae-43455_ftrs-noclminc-ob
 	Version: 7.45.96 (r745790)
@@ -34,10 +35,11 @@ Version-information: (`strings`)
 
 This firmware seems to be for the Pinebook Pro adapter. It was found as [a proposed patch](<https://lore.kernel.org/linux-firmware/20210117074817.1721-2-alistair@alistair23.me/> "[PULL 1/1] brcm: Add the brcmfmac43456-sdio.* files") to kernel [linux-firmware.git](<https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/> "Repository of firmware blobs for use with the Linux kernel") repository.
 
-I have not used this firmware at all.
+I have not used this firmware.
 
 Version-information: (`strings`)
 
+`brcmfmac43456-sdio.bin`
 ```
 43455c5-roml/43455_sdio-pno-aoe-pktfilter-pktctx-lpc-pwropt-43455_ftrs-mfp-noclminc-clm_min
 	Version: 7.84.17.1 (r871554)
@@ -47,6 +49,30 @@ Version-information: (`strings`)
 	FWID: 01-3d9e1d87
 ```
 
+### Firmware dated 2020-02-11 (`lib-firmware-brcm-20200211`)
+
+This firmware was found in the Armbian linux-firmware.git repository. See git-submodules for exact revision.
+
+I have not used this firmware.
+
+Version-information: (`strings`)
+
+`brcmfmac43456-sdio.bin`
+```
+43455c5-roml/43455_sdio-pno-aoe-pktfilter-bcm_ftrs-ak-bcol-clm_4335_ss-sr-mchan-pktctx-lpc-pwropt-txbf-wl11u-wapi-txpwr-wepso-gscan-linkstat-pwrstats-proxd-ndoe-mfp-tdls-dhcpd-idauth-idsup-neeze-akiss-dfsctl-apcs-tka-wpf-gtr-noplmt-ak_disassoc-b5gctl-sdiorxenhance
+	Version: 7.45.96.61 (be7af2d@shgit) (r745790)
+	CRC: 279731d4
+	Date: Tue 2020-02-11 11:55:51 CST
+	Ucode Ver: 1043.20721
+	FWID: 01-a41d86bd
+```
+
+`BCM4345C5.hcd`
+```
+GBCM4345C5 Ampak_CL1 UART 37.4 MHz BT 5.0 [Version: Version: 0039.0089]
+```
+
+
 ### Firmware dated 2017-06-16 (`lib-firmware-brcm-20170616`)
 
 The original firmware.
@@ -55,6 +81,7 @@ This version of the firmware is known to crash. Additionally, current available 
 
 Version-information: (`strings`)
 
+`brcmfmac43456-sdio.bin`
 ```
 43455c5-roml/43455_sdio-43455_ftrs-bcm_ftrs-ag-pno-aoe-pktfilter-srfast-pktctx-lpc-pwropt-wapi-mfp-clm_4335_ss-txpwr-wepso-noccxaka-sarctrl-gscan-linkstat-pwrstats-ak-idauth-idsup-ndoe-mchan-wfds
 	Version: 7.45.96.0
@@ -62,6 +89,11 @@ Version-information: (`strings`)
 	Date: Fri 2017-06-16 12:39:23 CST
 	Ucode Ver: 1043.2070
 	FWID: 01-1813af84
+```
+
+`BCM4345C5.hcd`
+```
+IBCM4345C5 Ampak_CL1.5 UART 37.4 MHz BT 5.0 [Version: Version: 0033.0080]
 ```
 
 ### Known issues

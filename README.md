@@ -33,7 +33,7 @@ Version-information: (`strings`)
 
 ### Firmware dated 2020-05-14 (`lib-firmware-brcm-20200514`)
 
-This firmware seems to be for the Pinebook Pro adapter. It was found as [a proposed patch](<https://lore.kernel.org/linux-firmware/20210117074817.1721-2-alistair@alistair23.me/> "[PULL 1/1] brcm: Add the brcmfmac43456-sdio.* files") to kernel [linux-firmware.git](<https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/> "Repository of firmware blobs for use with the Linux kernel") repository.
+This firmware seems to be for the Pinebook Pro adapter. [Raspberry Pi non-free firmware repository](<https://github.com/RPi-Distro/firmware-nonfree>). Originally found as [a proposed patch](<https://lore.kernel.org/linux-firmware/20210117074817.1721-2-alistair@alistair23.me/> "[PULL 1/1] brcm: Add the brcmfmac43456-sdio.* files") to kernel [linux-firmware.git](<https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/> "Repository of firmware blobs for use with the Linux kernel") repository.
 
 I have not used this firmware.
 

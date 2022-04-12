@@ -16,3 +16,6 @@
 [submodule "sources/imx-firmware"]
 	path = sources/imx-firmware
 	url = https://coral.googlesource.com/imx-firmware
+[submodule "sources/RPi-Distro"]
+	path = sources/RPi-Distro
+	url = https://github.com/RPi-Distro/firmware-nonfree.git

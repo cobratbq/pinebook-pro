@@ -115,10 +115,17 @@ IBCM4345C5 Ampak_CL1.5 UART 37.4 MHz BT 5.0 [Version: Version: 0033.0080]
 
 ### Known issues
 
-- After suspend, module `brcmfmac` might need to be reloaded, as it will exhibit significant packet loss.  
-  `sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`
-- There exists a bug in the firmware, i.e. the binary blob, so currently trying with `roamoff=1` module parameter and `.clm_blob` file present.  
-  See directory `issues` for more notes and details on a kernel module crash due to double freeing memory after hardware reset as result of firmware crash.
+- It seems that Pinebook Pro cannot resume after `memory`-type suspend(?). Disabling `mem`, making `standby` the default mode seems to solve this.  
+  ```
+  [Sleep]
+  AllowSuspend=yes
+  AllowHibernation=no
+  AllowSuspendThenHibernate=no
+  AllowHybridSleep=no
+  #SuspendMode=
+  #SuspendState=mem standby freeze
+  SuspendState=standby freeze
+  ```
 
 ## `keyboard-updater`
 
@@ -169,3 +176,10 @@ Installing Tow-Boot to the SPI flash ensures the Pinebook Pro firmware is availa
     input: rockchip,es8316-codec Headphones as /devices/platform/es8316-sound/sound/card0/input8
     ```
   - run `alsamixer` and select actual device. Then check if following channels are open: `Left Headphone Mixer LLIN`, `Left Headphone Mixer Left DAC`, `Right Headphone Mixer RLIN`, `Right Headphone Mixer Right DAC`, and check neighboring options just in case.
+- After suspend, module `brcmfmac` might need to be reloaded, as it will exhibit significant packet loss.  
+  `sudo modprobe -rv brcmfmac && sudo modprobe -v brcmfmac`  
+  _NOTE from what I understand of the kernel commit log, this is an issue that is caused by early driver versions not correctly responding to certain WiFi packets while in standby. This should be fixed for later kernel versions._
+- There exists a bug in the firmware, i.e. the binary blob, so currently trying with `roamoff=1` module parameter and `.clm_blob` file present.  
+  See directory `issues` for more notes and details on a kernel module crash due to double freeing memory after hardware reset as result of firmware crash.  
+  _NOTE early versions of the `brcmfmac` driver do not hardware-reset the device in case of firmware faiilure. Later firmware versions and kernel versions `> 5.12` should fix this._
+

@@ -1,0 +1,134 @@
+analogix_dp            49152  1 rockchipdrm
+autofs4                49152  0
+bluetooth             704512  7 btrtl,btqca,btsdio,btintel,hci_uart,btbcm
+brcmfmac              245760  0
+brcmutil               16384  1 brcmfmac
+btbcm                  28672  1 hci_uart
+btintel                40960  1 hci_uart
+btqca                  24576  1 hci_uart
+btrtl                  24576  1 hci_uart
+btsdio                 20480  0
+cec                    49152  2 drm_kms_helper,dw_hdmi
+cfg80211              745472  1 brcmfmac
+configfs               49152  1
+cpufreq_dt             20480  0
+crct10dif_ce           20480  0
+cw2015_battery         24576  0
+drm                   438272  16 drm_cma_helper,gpu_sched,drm_kms_helper,dw_mipi_dsi,panel_edp,drm_shmem_helper,rockchipdrm,dw_hdmi,panfrost,analogix_dp
+drm_cma_helper         20480  1 rockchipdrm
+drm_dp_aux_bus         20480  1 panel_edp
+drm_kms_helper        237568  8 drm_cma_helper,dw_mipi_dsi,panel_edp,rockchipdrm,dw_hdmi,analogix_dp
+drm_shmem_helper       24576  1 panfrost
+dwc3                  159744  0
+dwc3_of_simple         20480  0
+dw_hdmi                45056  1 rockchipdrm
+dw_mipi_dsi            20480  1 rockchipdrm
+dw_wdt                 20480  0
+ehci_hcd               90112  1 ehci_platform
+ehci_platform          20480  0
+evdev                  32768  18
+fan53555               16384  2
+fb_sys_fops            16384  1 drm_kms_helper
+fixed                  20480  33
+fusb302                36864  0
+governor_simpleondemand    16384  0
+gpio_charger           20480  0
+gpio_keys              24576  0
+gpu_sched              40960  1 panfrost
+hantro_vpu            135168  0
+hci_uart              135168  0
+hid                   131072  3 usbhid,hid_multitouch,hid_generic
+hid_generic            16384  0
+hid_multitouch         28672  0
+i2c_rk3x               24576  0
+industrialio           77824  3 industrialio_triggered_buffer,kfifo_buf,rockchip_saradc
+industrialio_triggered_buffer    16384  1 rockchip_saradc
+io_domain              24576  0
+ip_set                 49152  0
+ip_tables              32768  0
+joydev                 32768  0
+kfifo_buf              16384  1 industrialio_triggered_buffer
+leds_gpio              16384  0
+loop                   36864  4
+mc                     53248  6 rockchip_vdec,videodev,videobuf2_v4l2,hantro_vpu,videobuf2_common,v4l2_mem2mem
+Module                  Size  Used by
+mtd                    69632  3 spi_nor,ofpart
+nf_conntrack          135168  2 nf_nat,nft_ct
+nf_defrag_ipv4         16384  1 nf_conntrack
+nf_defrag_ipv6         24576  1 nf_conntrack
+nf_nat                 36864  1 nft_chain_nat
+nfnetlink              20480  3 nf_tables,ip_set
+nf_reject_ipv4         16384  1 nft_reject_inet
+nf_reject_ipv6         20480  1 nft_reject_inet
+nf_tables             208896  214 nft_ct,nft_reject_inet,nft_fib_ipv6,nft_fib_ipv4,nft_chain_nat,nft_reject,nft_fib,nft_fib_inet
+nft_chain_nat          16384  4
+nft_ct                 24576  7
+nft_fib                16384  3 nft_fib_ipv6,nft_fib_ipv4,nft_fib_inet
+nft_fib_inet           16384  1
+nft_fib_ipv4           16384  1 nft_fib_inet
+nft_fib_ipv6           16384  1 nft_fib_inet
+nft_reject             16384  1 nft_reject_inet
+nft_reject_inet        16384  4
+nvmem_rockchip_efuse    16384  0
+ofpart                 20480  0
+ohci_hcd               53248  1 ohci_platform
+ohci_platform          16384  0
+panel_edp              32768  0
+panfrost               69632  3
+phy_rockchip_emmc      16384  1
+phy_rockchip_inno_usb2    40960  12
+phy_rockchip_pcie      20480  0
+phy_rockchip_typec     20480  4
+pl330                  36864  4
+pwm_regulator          16384  0
+pwm_rockchip           16384  2
+rfkill                 32768  5 bluetooth,cfg80211
+rk808_regulator        40960  10
+rockchipdrm           122880  7
+rockchip_rga           28672  0
+rockchip_saradc        24576  0
+rockchip_thermal       28672  0
+rockchip_vdec          40960  0
+roles                  16384  2 dwc3,tcpm
+snd                    90112  9 snd_seq,snd_seq_device,snd_timer,snd_soc_core,snd_pcm
+snd_hrtimer            20480  1
+snd_pcm               118784  3 snd_soc_core,snd_soc_es8316,snd_pcm_dmaengine
+snd_pcm_dmaengine      20480  1 snd_soc_core
+snd_seq                94208  7 snd_seq_dummy
+snd_seq_device         20480  1 snd_seq
+snd_seq_dummy          16384  0
+snd_soc_core          208896  5 snd_soc_simple_amplifier,snd_soc_simple_card_utils,snd_soc_rockchip_i2s,snd_soc_simple_card,snd_soc_es8316
+snd_soc_es8316         40960  1
+snd_soc_rockchip_i2s    28672  2
+snd_soc_simple_amplifier    16384  1
+snd_soc_simple_card    24576  1
+snd_soc_simple_card_utils    24576  1 snd_soc_simple_card
+snd_timer              40960  3 snd_seq,snd_hrtimer,snd_pcm
+soundcore              20480  1 snd
+spi_nor                90112  0
+spi_rockchip           24576  0
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+tcp_bbr                24576  3
+tcpm                   69632  1 fusb302
+typec                  49152  1 tcpm
+udc_core               53248  1 dwc3
+ulpi                   20480  1 dwc3
+usb_common             16384  11 xhci_hcd,ohci_hcd,ehci_platform,phy_rockchip_inno_usb2,fusb302,usbcore,ehci_hcd,xhci_plat_hcd,dwc3,udc_core,tcpm
+usbcore               274432  7 ohci_platform,xhci_hcd,ohci_hcd,ehci_platform,usbhid,ehci_hcd,xhci_plat_hcd
+usbhid                 61440  0
+v4l2_h264              16384  2 rockchip_vdec,hantro_vpu
+v4l2_mem2mem           32768  3 rockchip_vdec,hantro_vpu,rockchip_rga
+v4l2_vp9               24576  2 rockchip_vdec,hantro_vpu
+videobuf2_common       53248  9 rockchip_vdec,videobuf2_vmalloc,videobuf2_dma_contig,videobuf2_v4l2,hantro_vpu,rockchip_rga,videobuf2_dma_sg,v4l2_mem2mem,videobuf2_memops
+videobuf2_dma_contig    24576  2 rockchip_vdec,hantro_vpu
+videobuf2_dma_sg       24576  1 rockchip_rga
+videobuf2_memops       20480  3 videobuf2_vmalloc,videobuf2_dma_contig,videobuf2_dma_sg
+videobuf2_v4l2         24576  4 rockchip_vdec,hantro_vpu,rockchip_rga,v4l2_mem2mem
+videobuf2_vmalloc      20480  1 hantro_vpu
+videodev              233472  6 rockchip_vdec,videobuf2_v4l2,hantro_vpu,rockchip_rga,videobuf2_common,v4l2_mem2mem
+xhci_hcd              253952  1 xhci_plat_hcd
+xhci_plat_hcd          20480  0
+x_tables               36864  1 ip_tables
+zram                   36864  2

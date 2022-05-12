@@ -10,6 +10,8 @@ Initialize git-submodules for source repositories.
   Some instructional blob used to enable wide bands for high-speed connections.
 - `BCM4345C5.hcd`: (bluetooth) firmware for combined WiFi/bluetooth module.
 
+Firmware in directory `lib-firmware-brcm-20201116` seems to perform well and is stable. Other users have noted that firmware `lib-firmware-brcm-20200514` is newer (revision) although it contains an older _Ucode Ver_ version.
+
 ### Firmware dated 2020-11-16 (`lib-firmware-brcm-20201116`)
 
 This firmware seems to be for the Pinebook Pro adapter. It was found in [some Raspberry Pi 400 forum post](<https://forums.raspberrypi.com/viewtopic.php?f=117&t=291688>).

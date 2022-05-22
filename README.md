@@ -117,8 +117,8 @@ IBCM4345C5 Ampak_CL1.5 UART 37.4 MHz BT 5.0 [Version: Version: 0033.0080]
 
 ### Known issues
 
-- The Pinebook Pro seems to have trouble restoring from standby/suspend. This may be a timing-related issue caused by `schedutil` governor. I have not yet been able to reproduce this issue while using the `ondemand` governor.
-  __INCORRECT__ it seems that Pinebook Pro cannot resume after `memory`-type suspend(?). Disabling `mem`, making `standby` the default mode seems to solve this.  
+- __INVESTIGATING__ the Pinebook Pro seems to have trouble restoring from standby/suspend. This may be a timing-related issue caused by `schedutil` governor. I have not yet been able to reproduce this issue while using the `ondemand` governor.
+  __INCORRECT__ it seems that Pinebook Pro cannot resume after `memory`-type suspend(?). Disabling `mem`, making `standby` the default mode seems to solve this. The custom `sleep.conf` is no longer justified.  
   ```
   [Sleep]
   AllowSuspend=yes

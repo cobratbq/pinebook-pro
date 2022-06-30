@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 5.15.46 Kernel Configuration
+# Linux/arm64 5.15.51 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Debian 10.2.1-6) 10.2.1 20210110"
 CONFIG_CC_IS_GCC=y
@@ -6046,6 +6046,7 @@ CONFIG_CRYPTO_LIB_SHA256=y
 CONFIG_CRYPTO_LIB_SM4=y
 # end of Crypto library routines
 
+CONFIG_LIB_MEMNEQ=y
 CONFIG_CRC_CCITT=y
 CONFIG_CRC16=y
 CONFIG_CRC_T10DIF=y

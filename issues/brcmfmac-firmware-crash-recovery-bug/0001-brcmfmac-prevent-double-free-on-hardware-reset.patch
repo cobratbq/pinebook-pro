@@ -1,7 +1,7 @@
-From ad471fa664dab865736183e669f22ccaff6f5197 Mon Sep 17 00:00:00 2001
+From de11a36833f3306dba671b7a846df337d59228ca Mon Sep 17 00:00:00 2001
 From: Danny van Heumen <danny@dannyvanheumen.nl>
-Date: Tue, 24 May 2022 18:30:50 +0200
-Subject: [PATCH] brcmfmac: prevent double-free on hardware-reset.
+Date: Sat, 2 Jul 2022 19:23:41 +0200
+Subject: [PATCH v4] brcmfmac: prevent double-free on hardware-reset
 
 In case of buggy firmware, brcmfmac may perform a hardware reset. If during
 reset and subsequent probing an early failure occurs, a memory region is
@@ -12,6 +12,8 @@ will be detected.
 - set '.freezer' pointer to NULL to prevent double-freeing under possible
   other circumstances and to re-align result under various different
   behaviors of memory allocation freeing.
+- correctly claim host on func1 for disabling func2.
+- after reset, do not initiate probing immediately, but rely on events.
 
 Given a firmware crash, function 'brcmf_sdio_bus_reset' is called. It calls
 'brcmf_sdiod_remove', then follows up with 'brcmf_sdiod_probe' to reinitialize
@@ -58,11 +60,12 @@ kernel BUG at mm/slub.c:379!
 
 Signed-off-by: Danny van Heumen <danny@dannyvanheumen.nl>
 ---
- drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ .../broadcom/brcm80211/brcmfmac/bcmsdh.c      | 31 ++++++++++++-------
+ .../broadcom/brcm80211/brcmfmac/sdio.c        | 10 +-----
+ 2 files changed, 21 insertions(+), 20 deletions(-)
 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
-index ac02244a6fdf..5c6b846284de 100644
+index ac02244a6fdf..dd634edaa0b3 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
 @@ -802,6 +802,7 @@ static void brcmf_sdiod_freezer_detach(struct brcmf_sdio_dev *sdiodev)
@@ -73,7 +76,23 @@ index ac02244a6fdf..5c6b846284de 100644
  	}
  }
  
-@@ -911,7 +912,7 @@ int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
+@@ -875,13 +876,9 @@ int brcmf_sdiod_remove(struct brcmf_sdio_dev *sdiodev)
+ 
+ 	brcmf_sdiod_freezer_detach(sdiodev);
+ 
+-	/* Disable Function 2 */
+-	sdio_claim_host(sdiodev->func2);
+-	sdio_disable_func(sdiodev->func2);
+-	sdio_release_host(sdiodev->func2);
+-
+-	/* Disable Function 1 */
++	/* Disable functions 2 then 1. */
+ 	sdio_claim_host(sdiodev->func1);
++	sdio_disable_func(sdiodev->func2);
+ 	sdio_disable_func(sdiodev->func1);
+ 	sdio_release_host(sdiodev->func1);
+ 
+@@ -911,7 +908,7 @@ int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
  	if (ret) {
  		brcmf_err("Failed to set F1 blocksize\n");
  		sdio_release_host(sdiodev->func1);
@@ -82,7 +101,7 @@ index ac02244a6fdf..5c6b846284de 100644
  	}
  	switch (sdiodev->func2->device) {
  	case SDIO_DEVICE_ID_BROADCOM_CYPRESS_4373:
-@@ -933,7 +934,7 @@ int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
+@@ -933,7 +930,7 @@ int brcmf_sdiod_probe(struct brcmf_sdio_dev *sdiodev)
  	if (ret) {
  		brcmf_err("Failed to set F2 blocksize\n");
  		sdio_release_host(sdiodev->func1);
@@ -91,6 +110,62 @@ index ac02244a6fdf..5c6b846284de 100644
  	} else {
  		brcmf_dbg(SDIO, "set F2 blocksize to %d\n", f2_blksz);
  	}
+@@ -1096,12 +1093,24 @@ static void brcmf_ops_sdio_remove(struct sdio_func *func)
+ 	if (bus_if) {
+ 		sdiodev = bus_if->bus_priv.sdio;
+ 
++		if (func->num != 1) {
++			/* Satisfy kernel expectation that the irq is released once the
++			 * '.remove' callback has executed, while respecting the design
++			 * that removal is executed for 'sdiodev', instead of individual
++			 * function.
++			 */
++			brcmf_dbg(SDIO, "Only release irq for function %d", func->num);
++			sdio_claim_host(sdiodev->func1);
++			sdio_release_irq(func);
++			sdio_release_host(sdiodev->func1);
++			return;
++		}
++
++		/* func 1: so do full clean-up and removal */
++
+ 		/* start by unregistering irqs */
+ 		brcmf_sdiod_intr_unregister(sdiodev);
+ 
+-		if (func->num != 1)
+-			return;
+-
+ 		/* only proceed with rest of cleanup if func 1 */
+ 		brcmf_sdiod_remove(sdiodev);
+ 
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+index 212fbbe1cd7e..2ed70f809097 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+@@ -4152,7 +4152,6 @@ int brcmf_sdio_get_fwname(struct device *dev, const char *ext, u8 *fw_name)
+ 
+ static int brcmf_sdio_bus_reset(struct device *dev)
+ {
+-	int ret = 0;
+ 	struct brcmf_bus *bus_if = dev_get_drvdata(dev);
+ 	struct brcmf_sdio_dev *sdiodev = bus_if->bus_priv.sdio;
+ 
+@@ -4169,14 +4168,7 @@ static int brcmf_sdio_bus_reset(struct device *dev)
+ 	sdio_release_host(sdiodev->func1);
+ 
+ 	brcmf_bus_change_state(sdiodev->bus_if, BRCMF_BUS_DOWN);
+-
+-	ret = brcmf_sdiod_probe(sdiodev);
+-	if (ret) {
+-		brcmf_err("Failed to probe after sdio device reset: ret %d\n",
+-			  ret);
+-	}
+-
+-	return ret;
++	return 0;
+ }
+ 
+ static const struct brcmf_bus_ops brcmf_sdio_bus_ops = {
 -- 
 2.34.1
 

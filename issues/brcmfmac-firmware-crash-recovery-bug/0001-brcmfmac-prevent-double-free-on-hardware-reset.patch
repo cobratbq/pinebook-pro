@@ -1,7 +1,7 @@
-From de11a36833f3306dba671b7a846df337d59228ca Mon Sep 17 00:00:00 2001
+From da0458fa823ed226dabc8a0d7a474024e6542325 Mon Sep 17 00:00:00 2001
 From: Danny van Heumen <danny@dannyvanheumen.nl>
-Date: Sat, 2 Jul 2022 19:23:41 +0200
-Subject: [PATCH v4] brcmfmac: prevent double-free on hardware-reset
+Date: Fri, 8 Jul 2022 22:36:17 +0200
+Subject: [PATCH v5] brcmfmac: prevent double-free on hardware-reset
 
 In case of buggy firmware, brcmfmac may perform a hardware reset. If during
 reset and subsequent probing an early failure occurs, a memory region is
@@ -60,12 +60,12 @@ kernel BUG at mm/slub.c:379!
 
 Signed-off-by: Danny van Heumen <danny@dannyvanheumen.nl>
 ---
- .../broadcom/brcm80211/brcmfmac/bcmsdh.c      | 31 ++++++++++++-------
- .../broadcom/brcm80211/brcmfmac/sdio.c        | 10 +-----
- 2 files changed, 21 insertions(+), 20 deletions(-)
+ .../wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c   | 13 +++++--------
+ .../net/wireless/broadcom/brcm80211/brcmfmac/sdio.c | 10 +---------
+ 2 files changed, 6 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
-index ac02244a6fdf..dd634edaa0b3 100644
+index ac02244a6fdf..414ee21f42e3 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcmsdh.c
 @@ -802,6 +802,7 @@ static void brcmf_sdiod_freezer_detach(struct brcmf_sdio_dev *sdiodev)
@@ -110,34 +110,6 @@ index ac02244a6fdf..dd634edaa0b3 100644
  	} else {
  		brcmf_dbg(SDIO, "set F2 blocksize to %d\n", f2_blksz);
  	}
-@@ -1096,12 +1093,24 @@ static void brcmf_ops_sdio_remove(struct sdio_func *func)
- 	if (bus_if) {
- 		sdiodev = bus_if->bus_priv.sdio;
- 
-+		if (func->num != 1) {
-+			/* Satisfy kernel expectation that the irq is released once the
-+			 * '.remove' callback has executed, while respecting the design
-+			 * that removal is executed for 'sdiodev', instead of individual
-+			 * function.
-+			 */
-+			brcmf_dbg(SDIO, "Only release irq for function %d", func->num);
-+			sdio_claim_host(sdiodev->func1);
-+			sdio_release_irq(func);
-+			sdio_release_host(sdiodev->func1);
-+			return;
-+		}
-+
-+		/* func 1: so do full clean-up and removal */
-+
- 		/* start by unregistering irqs */
- 		brcmf_sdiod_intr_unregister(sdiodev);
- 
--		if (func->num != 1)
--			return;
--
- 		/* only proceed with rest of cleanup if func 1 */
- 		brcmf_sdiod_remove(sdiodev);
- 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
 index 212fbbe1cd7e..2ed70f809097 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c

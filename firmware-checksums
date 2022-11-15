@@ -8,3 +8,10 @@
 ddf83f2100885b166be52d21c8966db164fdd4e1d816aca2acc67ee9cc28d726 *lib-firmware-brcm-20200514/brcmfmac43456-sdio.bin
 ddf83f2100885b166be52d21c8966db164fdd4e1d816aca2acc67ee9cc28d726 *sources/RPi-Distro/debian/config/brcm80211/brcm/brcmfmac43456-sdio.bin
 61ce3f0ee6355d46fa586f1279bc7d355c82662b90dbf7fb97f6e9556058bfd4 *lib-firmware-brcm-20201116/brcmfmac43456-sdio.bin
+8e2250518bc789e53109728c3c0a6124bc3801a75a1cb4966125753cf1f0252e *./lib-firmware-brcm-20170616/brcmfmac43456-sdio.clm_blob
+8e2250518bc789e53109728c3c0a6124bc3801a75a1cb4966125753cf1f0252e *./sources/pinebook-firmware/brcm/brcmfmac43456-sdio.clm_blob
+2dbd7d22fc9af0eb560ceab45b19646d211bc7b34a1dd00c6bfac5dd6ba25e8a *./lib-firmware-brcm-20200211/brcmfmac43456-sdio.clm_blob
+2dbd7d22fc9af0eb560ceab45b19646d211bc7b34a1dd00c6bfac5dd6ba25e8a *./lib-firmware-brcm-20200514/brcmfmac43456-sdio.clm_blob
+2dbd7d22fc9af0eb560ceab45b19646d211bc7b34a1dd00c6bfac5dd6ba25e8a *./lib-firmware-brcm-20201116/brcmfmac43456-sdio.clm_blob
+2dbd7d22fc9af0eb560ceab45b19646d211bc7b34a1dd00c6bfac5dd6ba25e8a *./sources/RPi-Distro/debian/config/brcm80211/brcm/brcmfmac43456-sdio.clm_blob
+2dbd7d22fc9af0eb560ceab45b19646d211bc7b34a1dd00c6bfac5dd6ba25e8a *./sources/armbian-linux-firmware.git/brcm/brcmfmac43456-sdio.clm_blob
